@@ -12,15 +12,17 @@ source:
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  skip: true # [py<38]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
+    - setuptools
+    - wheel
   run:
-    - python >=3.6
+    - python
     - regex
 
 test:
@@ -35,7 +37,10 @@ about:
   home: https://github.com/asottile/re-assert
   summary: show where your regex match assertion failed!
   license: MIT
+  license_family: MIT
   license_file: LICENSE
+  dev_url: https://github.com/asottile/re-assert
+  doc_url: https://github.com/asottile/re-assert
 
 extra:
   recipe-maintainers:
